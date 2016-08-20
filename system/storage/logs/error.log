@@ -1,0 +1,4 @@
+2016-08-20 11:06:41 - PHP Warning:  imagepng(/opt/lampp/htdocs/image/cache/catalog/logo-100x100.png): failed to open stream: Permission denied in /opt/lampp/htdocs/system/library/image.php on line 66
+2016-08-20 11:06:41 - PHP Warning:  imagepng(/opt/lampp/htdocs/image/cache/catalog/cart-100x100.png): failed to open stream: Permission denied in /opt/lampp/htdocs/system/library/image.php on line 66
+2016-08-20 11:06:45 - PHP Warning:  imagepng(/opt/lampp/htdocs/image/cache/catalog/logo-100x100.png): failed to open stream: Permission denied in /opt/lampp/htdocs/system/library/image.php on line 66
+2016-08-20 11:06:45 - PHP Warning:  imagepng(/opt/lampp/htdocs/image/cache/catalog/cart-100x100.png): failed to open stream: Permission denied in /opt/lampp/htdocs/system/library/image.php on line 66
