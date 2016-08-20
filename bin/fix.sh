@@ -1,1 +1,1 @@
-chmod 777 -R /opt/lampp/htdocs/*
+chmod 777 -R /usr/share/nginx/html/chinchin/*
