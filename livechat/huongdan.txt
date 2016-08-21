@@ -1,0 +1,15 @@
+﻿
+HUONG DAN TICH HOP 
+PHAN MEM LIVECHAT FACEBOOK LEN WEBSITE
+**************************************
+BUOC 1: Giai nen pass hoangluyen.com
+BUOC 2: Copy thu muc vua giai nen livechat upload len host bang phan mem FTP -> /public_html/livechat
+BUOC 3: Copy ma nhung tu link sau http://hoangluyen.com/livechat-fanpage-facebook/
+hoac trong file demo.html cua thu muc livechat -> Paste vao file footer.php
++ Neu la Wordpress /public_html/wp-content/themes/theme_name/footer.php
++ Neu la website khac bạn paste vao truoc the dong </body> 
+
+SAU DO LUU lai a chay thu, Ban co the tich hop chat ket noi voi dien thoai qua Fanpage Facebook xem chi tiet huong dan tren website.
+
+CHU Y:
+Neu gap loi hoac ban thay khong tien loi, xin vui long gui gopy y ve hop thu admin@hoangluyen.com. Tran trong cam on
