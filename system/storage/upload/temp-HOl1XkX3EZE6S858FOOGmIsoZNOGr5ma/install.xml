@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>Facebook Message</name>
+	<version>1.0</version>
+	<code>ocxfbm10</code>
+	<author>OC-Extensions.com</author>
+	<link>http://www.oc-extensions.com/Facebook-Message-Opencart-2.x</link>
+
+	<file path="catalog/controller/common/header.php">
+		<operation error="log">
+			<search><![CDATA[$data['title'] = $this->document->getTitle();]]></search>
+			<add position="after"><![CDATA[ 
+			// Facebook Message - add required JS + CSS files
+			$this->document->addScript('catalog/view/javascript/jquery/jquery.fbmessage.js'); 
+					
+			if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/facebook_message.css')) {
+				$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/facebook_message.css');
+			} else {
+				$this->document->addStyle('catalog/view/theme/default/stylesheet/facebook_message.css');
+			}	
+			
+			if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/animate.css')) {
+				$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/animate.css');
+			} else {
+				$this->document->addStyle('catalog/view/theme/default/stylesheet/animate.css');
+			}
+			]]></add>
+		</operation>
+	</file>
+</modification>
