@@ -1,25 +1,25 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://shopchinchin.com/admin/');
-define('HTTP_CATALOG', 'http://shopchinchin.com/');
+define('HTTP_SERVER', 'http://localhost/admin/');
+define('HTTP_CATALOG', 'http://localhost/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://shopchinchin.com/admin/');
-define('HTTPS_CATALOG', 'http://shopchinchin.com/');
+define('HTTPS_SERVER', 'http://localhost/admin/');
+define('HTTPS_CATALOG', 'http://localhost/');
 
 // DIR
-define('DIR_APPLICATION', '/usr/share/nginx/html/chinchin/admin/');
-define('DIR_SYSTEM', '/usr/share/nginx/html/chinchin/system/');
-define('DIR_LANGUAGE', '/usr/share/nginx/html/chinchin/admin/language/');
-define('DIR_TEMPLATE', '/usr/share/nginx/html/chinchin/admin/view/template/');
-define('DIR_CONFIG', '/usr/share/nginx/html/chinchin/system/config/');
-define('DIR_IMAGE', '/usr/share/nginx/html/chinchin/image/');
-define('DIR_CACHE', '/usr/share/nginx/html/chinchin/system/storage/cache/');
-define('DIR_DOWNLOAD', '/usr/share/nginx/html/chinchin/system/storage/download/');
-define('DIR_LOGS', '/usr/share/nginx/html/chinchin/system/storage/logs/');
-define('DIR_MODIFICATION', '/usr/share/nginx/html/chinchin/system/storage/modification/');
-define('DIR_UPLOAD', '/usr/share/nginx/html/chinchin/system/storage/upload/');
-define('DIR_CATALOG', '/usr/share/nginx/html/chinchin/catalog/');
+define('DIR_APPLICATION', '/opt/lampp/htdocs/admin/');
+define('DIR_SYSTEM', '/opt/lampp/htdocs/system/');
+define('DIR_LANGUAGE', '/opt/lampp/htdocs/admin/language/');
+define('DIR_TEMPLATE', '/opt/lampp/htdocs/admin/view/template/');
+define('DIR_CONFIG', '/opt/lampp/htdocs/system/config/');
+define('DIR_IMAGE', '/opt/lampp/htdocs/image/');
+define('DIR_CACHE', '/opt/lampp/htdocs/system/storage/cache/');
+define('DIR_DOWNLOAD', '/opt/lampp/htdocs/system/storage/download/');
+define('DIR_LOGS', '/opt/lampp/htdocs/system/storage/logs/');
+define('DIR_MODIFICATION', '/opt/lampp/htdocs/system/storage/modification/');
+define('DIR_UPLOAD', '/opt/lampp/htdocs/system/storage/upload/');
+define('DIR_CATALOG', '/opt/lampp/htdocs/catalog/');
 
 // DB
 define('DB_DRIVER', 'mysqli');

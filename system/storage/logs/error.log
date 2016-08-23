@@ -5,3 +5,11 @@
 2016-08-20 15:28:57 - PHP Notice:  Undefined variable: captcha in /opt/lampp/htdocs/catalog/view/theme/pav_styleshop/template/product/product_detail_hitech.tpl on line 336
 2016-08-20 18:33:05 - PHP Notice:  Undefined variable: captcha in /opt/lampp/htdocs/catalog/view/theme/pav_styleshop/template/product/product_detail_hitech.tpl on line 336
 2016-08-21 5:13:30 - PHP Notice:  Undefined variable: captcha in /usr/share/nginx/html/chinchin/catalog/view/theme/pav_styleshop/template/product/product_detail_hitech.tpl on line 336
+2016-08-23 17:09:32 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:42 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:43 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:45 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:46 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:46 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:46 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
+2016-08-23 17:09:52 - PHP Notice:  Undefined variable: output in /opt/lampp/htdocs/admin/model/verticalmenu/tree.php on line 144
