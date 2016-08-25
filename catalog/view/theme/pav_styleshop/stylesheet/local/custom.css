@@ -1,3 +1,7 @@
+#header-main #logo {
+    padding: 4px 3px 4px 0;
+   margin-left: 20px;
+}
 .product-label-freeship {
      top: 0;
      right: 20px;
