@@ -1,11 +1,25 @@
-<?php $objlang = $this->registry->get('language');  $ourl = $this->registry->get('url');?>
+<?php $objlang = $this->registry->get('language');
+ 	  $ourl = $this->registry->get('url');
+
+?>
+
+<?php
+	if(strpos(substr($product['description'],-12), 'freeship') !== false){
+
+	} else {
+		
+	}
+?>
+
 <div class="product-block item-default" itemtype="http://schema.org/Product" itemscope>
 
 	<?php if ($product['thumb']) {    ?>
 		 <div class="image">
 		 	<!-- text sale-->
 			<?php if( $product['special'] ) {   ?>
-	    	<span class="product-label-special product-label"><span class="special"><?php echo $objlang->get( 'Sale' ); ?></span></span>
+	    	<span class="product-label-special product-label">
+				<span class="special"><?php echo $objlang->get( 'Sale' ); ?></span>
+			</span>
 	    	<?php } ?>
 
 			<a class="img" href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" class="img-responsive" /></a>

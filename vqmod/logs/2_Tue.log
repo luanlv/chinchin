@@ -1,0 +1,24 @@
+---------- Date: 2016-08-23 20:06:33 ~ IP : ::1 ----------
+REQUEST URI : /
+MOD DETAILS:
+   modFile   : /opt/lampp/htdocs/vqmod/xml/install.xml
+   id        : 
+   version   : 2.0
+   vqmver    : 
+   author    : Oleh Vasylyev
+VQModObject::parseMods - Could not resolve path for [catalog/controller/module/bestseller.php|catalog/controller/extension/module/bestseller.php] (SKIPPED)
+----------------------------------------------------------------------
+
+
+---------- Date: 2016-08-23 20:07:42 ~ IP : ::1 ----------
+REQUEST URI : /
+MOD DETAILS:
+   modFile   : /opt/lampp/htdocs/vqmod/xml/install.xml
+   id        : 
+   version   : 2.0
+   vqmver    : 
+   author    : Oleh Vasylyev
+VQModObject::parseMods - Could not resolve path for [catalog/controller/module/bestseller.php|catalog/controller/extension/module/bestseller.php] (SKIPPED)
+----------------------------------------------------------------------
+
+

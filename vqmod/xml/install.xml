@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <name>Promotional Stickers Lite by TobiknetSoftware</name>
+    <code>promotional-stickers</code>
+	<version>2.0</version>
+	<author>Oleh Vasylyev</author>
+	<link>http://www.opencart.com/index.php?route=extension/extension/info&amp;extension_id=25226</link>
+
+	
+
+	<file path="catalog/model/tool/image.php">
+        <operation>
+			<search><![CDATA[
+class ModelToolImage extends Model {
+			]]></search>
+            <add position="after"><![CDATA[
+	public function gdpromo($image, $promo_stamp_on, $promo_stamp, $promo_txt_stamp_text, $promo_shadow) {
+		if($promo_stamp_on == 1){	
+			if(!is_dir('image/promo/cache')){
+				$structure = 'image/promo/cache/';
+				if (!mkdir($structure, 0644, true)) {
+					die('<p>mkdir failed<p>');
+				}
+			} 
+			
+			$promo_txt_font_size = 14;
+			$promo_txt_font_color = "#ffffff";
+			
+			$ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+			$image = str_replace(HTTP_SERVER, "", $image);
+			$image = str_replace(HTTPS_SERVER, "", $image);
+
+			if (($ext == 'jpg') || ($ext == 'jpeg')){
+				$target_img  = imagecreatefromjpeg($image); // creating the image
+			}elseif($ext == 'png'){
+				$target_img  = imagecreatefrompng($image); // creating the image
+				imagealphablending($target_img, true);
+				imagesavealpha($target_img, true);
+			}elseif($ext == 'bmp'){
+				$target_img  = imagecreatefrombmp($image); // creating the image
+			}elseif($ext == 'gif'){
+				$target_img  = imagecreatefromgif($image); // creating the image
+			}
+			
+			
+			list($color_r, $color_g, $color_b) = sscanf($promo_txt_font_color, "#%02x%02x%02x");
+			
+			$promo_txt_stamp_font   = "image/promo/font/tahoma.ttf";
+			$promo_txt_grey_color  = imagecolorallocate($target_img, 118, 128, 128); //grey color
+			$promo_txt_font_color  = imagecolorallocate($target_img, $color_r, $color_g, $color_b); //red color
+			$promo_stamp = @imagecreatefrompng("image/promo/image/$promo_stamp");
+
+			$promo_txt_marge_up = @imagesy($promo_stamp) / 2 + $promo_txt_font_size / 2;
+			
+			if (!empty($promo_txt_stamp_text)){
+			// $promo_txt_stamp_text = wordwrap($promo_txt_stamp_text, true);
+			
+			if($promo_shadow == 1){
+				@imagettftext($promo_stamp, $promo_txt_font_size, 0, 17 - 1, $promo_txt_marge_up + 1, $promo_txt_grey_color, $promo_txt_stamp_font, $promo_txt_stamp_text); // adding shadow
+			}
+			
+			@imagettftext($promo_stamp, $promo_txt_font_size, 0, 17, $promo_txt_marge_up, $promo_txt_font_color, $promo_txt_stamp_font, $promo_txt_stamp_text); // adding the text
+			}
+			
+		
+			@imagecopy($target_img, $promo_stamp, (imagesx($target_img) - imagesx($promo_stamp)) * 1, (imagesy($target_img) - imagesy($promo_stamp)) * 0, 0, 0, imagesx($promo_stamp), imagesy($promo_stamp));
+
+			imagepng($target_img, 'image/promo/cache/'.basename($image), 1);
+
+			imagedestroy($target_img);
+
+			return 'image/promo/cache/' . basename($image);
+		}
+	}
+            ]]></add>
+        </operation>
+	</file>
+	
+
+    <file path="admin/model/catalog/product.php">	
+        <operation>
+			<search><![CDATA[
+sku = '" . $this->db->escape($data['sku']) . "',
+			]]></search>
+            <add position="replace"><![CDATA[
+promo_stamp_on = '" . $this->db->escape($data['promo_stamp_on']) . "', promo_stamp = '" . $this->db->escape($data['promo_stamp']) . "', promo_txt_stamp_text = '" . $this->db->escape($data['promo_txt_stamp_text']) . "', promo_shadow = '" . $this->db->escape($data['promo_shadow']) . "', sku = '" . $this->db->escape($data['sku']) . "',
+            ]]></add>
+        </operation>
+	</file>
+	
+    <file path="admin/controller/catalog/product.php">	
+        <operation>
+			<search><![CDATA[
+				if (isset($this->request->post['sku'])) {
+			]]></search>
+            <add position="before"><![CDATA[
+				if (isset($this->request->post['promo_stamp_on'])) {
+					$data['promo_stamp_on'] = $this->request->post['promo_stamp_on'];
+				} elseif (!empty($product_info)) {
+					$data['promo_stamp_on'] = $product_info['promo_stamp_on'];
+				} else {
+					$data['promo_stamp_on'] = '';
+				}
+				
+				if (isset($this->request->post['promo_stamp'])) {
+					$data['promo_stamp'] = $this->request->post['promo_stamp'];
+				} elseif (!empty($product_info)) {
+					$data['promo_stamp'] = $product_info['promo_stamp'];
+				} else {
+					$data['promo_stamp'] = '';
+				}
+				
+				
+				if (isset($this->request->post['promo_txt_stamp_text'])) {
+					$data['promo_txt_stamp_text'] = $this->request->post['promo_txt_stamp_text'];
+				} elseif (!empty($product_info)) {
+					$data['promo_txt_stamp_text'] = $product_info['promo_txt_stamp_text'];
+				} else {
+					$data['promo_txt_stamp_text'] = '';
+				}
+				
+				
+				if (isset($this->request->post['promo_shadow'])) {
+					$data['promo_shadow'] = $this->request->post['promo_shadow'];
+				} elseif (!empty($product_info)) {
+					$data['promo_shadow'] = $product_info['promo_shadow'];
+				} else {
+					$data['promo_shadow'] = '';
+				}
+				
+            ]]></add>
+        </operation>
+	</file>
+
+    <file path="admin/view/template/catalog/product_form.tpl">	
+        <operation>
+			<search><![CDATA[
+				<label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="<?php echo $help_sku; ?>"><?php echo $entry_sku; ?></span></label>
+			]]></search>
+            <add position="before" offset="1"><![CDATA[
+	<!-- promo_stamp_on -->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-promo_stamp_on">Promotion sticker<br><br>More features are available in the <a href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=25226">Full version</a></label>
+                <div class="col-sm-10">
+					<select name="promo_stamp_on" id="input-promo_stamp_on" class="form-control">
+					  <?php if ($promo_stamp_on == '0') { ?>
+					  <option value="0" selected="selected"><?php echo "OFF"; ?></option>
+					  <?php } else { ?>
+					  <option value="0"><?php echo "OFF"; ?></option>
+					  <?php } ?>
+					  <?php if ($promo_stamp_on == '1') { ?>
+					  <option value="1" selected="selected"><?php echo "ON"; ?></option>
+					  <?php } else { ?>
+					  <option value="1"><?php echo "ON"; ?></option>
+					  <?php } ?>
+					</select><br>
+			  
+	<!-- promo_stamp -->		  
+			  
+                <label class="col-sm-1 control-label" for="input-promo_stamp"><span data-toggle="tooltip" title="You can upload additional images in PNG format (transparent) to folder ../image/promo/image  !ONLY *.png!">Image</span></label>
+                <div class="col-sm-3">
+				  <select name="promo_stamp" id="input-promo_stamp" class="form-control">
+					<?php 	$files = scandir('../image/promo/image'); 
+							foreach (array_slice($files, 2) as $key => $value){ ?>
+								<option value="<?php echo $value; ?>" <?php if ($value == $promo_stamp ) echo 'selected' ; ?>><?php echo $value; ?></option>
+					<?php } ?>
+				  </select><br>
+				</div>
+			  
+	<!-- promo_stamp_marge_up -->
+
+                <label class="col-sm-2 control-label" for="input-promo_stamp_marge_up"><span data-toggle="tooltip" title="This setting is available in the Full Version">Align vertical</span></label>
+                <div class="col-sm-2">
+					<?php !empty($promo_stamp_marge_up) ?  : $promo_stamp_marge_up = 0 ; ?>
+					<span data-toggle="tooltip" title="This setting is available in the Full Version"><select name="promo_stamp_marge_up" id="input-promo_stamp_marge_up" class="form-control" disabled>
+					  <option value="0" <?php if ($promo_stamp_marge_up == 0 ) echo 'selected' ; ?>>Up</option>
+					  <option value="0.5" <?php if ($promo_stamp_marge_up == "0.5" ) echo 'selected' ; ?>>Center</option>
+					  <option value="1" <?php if ($promo_stamp_marge_up == 1 ) echo 'selected' ; ?>>Bottom</option>
+					</select></span><br>
+                </div>
+			  
+	<!-- promo_stamp_marge_left -->
+				
+                <label class="col-sm-2 control-label" for="input-promo_stamp_marge_left"><span data-toggle="tooltip" title="This setting is available in the Full Version">Align horizontal</span></label>
+                <div class="col-sm-2">
+					<?php !empty($promo_stamp_marge_left) ?  : $promo_stamp_marge_left = 0 ; ?>
+					<span data-toggle="tooltip" title="This setting is available in the Full Version"><select name="promo_stamp_marge_left" id="input-promo_stamp_marge_left" class="form-control" disabled>
+					  <option value="0" <?php if ($promo_stamp_marge_left == 0 ) echo 'selected' ; ?>>Left</option>
+					  <option value="0.5" <?php if ($promo_stamp_marge_left == "0.5" ) echo 'selected' ; ?>>Center</option>
+					  <option value="1" <?php if ($promo_stamp_marge_left == 1 ) echo 'selected' ; ?>>Right</option>
+					</select></span><br>
+				</div>
+				
+	<!-- promo_txt_stamp_text -->
+              
+                <label class="col-sm-1 control-label" for="input-promo_txt_stamp_text">Text</label>
+                <div class="col-sm-4">
+                  <input type="text" name="promo_txt_stamp_text" value="<?php echo !empty($promo_txt_stamp_text) ? $promo_txt_stamp_text : ''; ?>" placeholder="Leave empty if you don't want use text" id="input-promo_txt_stamp_text" class="form-control" /><br>
+                </div>
+				
+	<!-- promo_txt_stamp_font -->
+              
+                <label class="col-sm-1 control-label" for="input-promo_txt_stamp_font"><span data-toggle="tooltip" title="This setting is available in the Full Version">Font</span></label>
+                <div class="col-sm-2">
+				  <?php !empty($promo_txt_stamp_font) ?  : $promo_txt_stamp_font = 'tahoma.ttf' ; ?>
+				  <span data-toggle="tooltip" title="This setting is available in the Full Version"><select name="promo_txt_stamp_font" id="input-promo_txt_stamp_font" class="form-control" disabled>
+					<?php 	$files = scandir('../image/promo/font'); 
+							foreach (array_slice($files, 2) as $key => $value){ ?>
+								<option value="<?php echo $value; ?>" <?php if ($value == $promo_txt_stamp_font ) echo 'selected' ; ?>><?php echo $value; ?></option>
+					<?php } ?>
+				  </select></span><br>
+                </div>
+              
+	<!-- promo_txt_font_size -->
+              
+                <label class="col-sm-2 control-label" for="input-promo_txt_font_size"><span data-toggle="tooltip" title="This setting is available in the Full Version">Font size</span></label>
+                <div class="col-sm-2">
+					<?php !empty($promo_txt_font_size) ?  : $promo_txt_font_size = 14 ; ?>
+					<span data-toggle="tooltip" title="This setting is available in the Full Version"><select name="promo_txt_font_size" id="input-promo_txt_font_size" class="form-control" disabled>
+					  <option value="8" <?php if ($promo_txt_font_size == 8 ) echo 'selected' ; ?>>8</option>
+					  <option value="10" <?php if ($promo_txt_font_size == 10 ) echo 'selected' ; ?>>10</option>
+					  <option value="12" <?php if ($promo_txt_font_size == 12 ) echo 'selected' ; ?>>12</option>
+					  <option value="14" <?php if ($promo_txt_font_size == 14 ) echo 'selected' ; ?>>14</option>
+					  <option value="16" <?php if ($promo_txt_font_size == 16 ) echo 'selected' ; ?>>16</option>
+					  <option value="18" <?php if ($promo_txt_font_size == 18 ) echo 'selected' ; ?>>18</option>
+					  <option value="22" <?php if ($promo_txt_font_size == 22 ) echo 'selected' ; ?>>22</option>
+					  <option value="28" <?php if ($promo_txt_font_size == 28 ) echo 'selected' ; ?>>28</option>
+					</select></span><br>
+                </div>
+              
+	<!-- promo_txt_font_color -->
+              
+                <label class="col-sm-2 control-label" for="input-promo_txt_font_color"><span data-toggle="tooltip" title="This setting is available in the Full Version">Text color</span></label>
+                <div class="col-sm-2">
+                  <span data-toggle="tooltip" title="This setting is available in the Full Version"><input type="color" name="promo_txt_font_color" value="<?php echo !empty($promo_txt_font_color) ? $promo_txt_font_color : '#FFFFFF'; ?>" placeholder="promo_txt_font_color" id="input-promo_txt_font_color" class="form-control" disabled /></span><br>
+                </div>
+             
+	<!-- promo_shadow -->
+              
+                <label class="col-sm-2 control-label" for="input-promo_shadow">Font shadow</label>
+                <div class="col-sm-2">
+					<select name="promo_shadow" id="input-promo_shadow" class="form-control">
+					  <option value="1" <?php if ($promo_shadow != 2 ) echo 'selected="selected"' ; ?>>ON</option>
+					  <option value="2" <?php if ($promo_shadow == 2 ) echo 'selected="selected"' ; ?>>OFF</option>
+					</select><br>
+                </div>
+              
+	<!-- promo_txt_marge_left -->
+              
+                <label class="col-sm-2 control-label" for="input-promo_txt_marge_left"><span data-toggle="tooltip" title="This setting is available in the Full Version">Text margin left</span></label>
+                <div class="col-sm-2">
+                  <span data-toggle="tooltip" title="This setting is available in the Full Version"><input type="text" name="promo_txt_marge_left" value="<?php echo !empty($promo_txt_marge_left) ? $promo_txt_marge_left : '17'; ?>" placeholder="promo_txt_marge_left" id="input-promo_txt_marge_left" class="form-control" disabled /></span><br>
+                </div>
+              </div>
+			</div>
+            ]]></add>
+        </operation>
+	</file>	
+	
+    <file path="catalog/model/catalog/product.php">	
+        <operation>
+			<search><![CDATA[
+				'sku'              => $query->row['sku'],
+			]]></search>
+            <add position="before"><![CDATA[				
+				'promo_stamp_on'           => $query->row['promo_stamp_on'],
+				'promo_stamp'              => $query->row['promo_stamp'],
+				'promo_txt_stamp_text'     => $query->row['promo_txt_stamp_text'],
+				'promo_shadow'             => $query->row['promo_shadow'],
+            ]]></add>
+        </operation>
+	</file>
+
+    <file path="catalog/controller/module/bestseller.php|catalog/controller/extension/module/bestseller.php">	
+        <operation>
+			<search><![CDATA[
+$image = $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height']);
+			]]></search>
+            <add position="after"><![CDATA[
+					if (isset($result['promo_stamp_on']) && $result['promo_stamp_on'] == 1){
+							$image = $this->model_tool_image->gdpromo($image, $result['promo_stamp_on'], $result['promo_stamp'], $result['promo_txt_stamp_text'], $result['promo_shadow']);
+					}
+            ]]></add>
+        </operation>
+	</file>
+	
+</modification>
+	
+			
+			
+			
+			
+			

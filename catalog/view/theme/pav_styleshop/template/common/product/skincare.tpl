@@ -3,7 +3,6 @@
  $objlang->load('module/themecontrol');
  ?>
  <div class="product-block item-skincare" itemtype="http://schema.org/Product" itemscope>
-    
     <div class="block-img">
         <?php if ($product['thumb']) {    ?>
             <?php if( $product['special'] ) {   ?>
@@ -11,6 +10,7 @@
                 <span class="product-label-special"><?php echo $objlang->get( 'text_sale' ); ?></span>
             </span>
         <?php } ?>
+
 
             <div class="image">
                 <a class="img" itemprop="url" title="<?php echo $product['name']; ?>" href="<?php echo $product['href']; ?>">
