@@ -3,18 +3,26 @@
 
 ?>
 
-<?php
-	if(strpos(substr($product['description'],-12), 'freeship') !== false){
 
-	} else {
-		
-	}
-?>
 
 <div class="product-block item-default" itemtype="http://schema.org/Product" itemscope>
 
-	<?php if ($product['thumb']) {    ?>
+<?php if ($product['thumb']) {    ?>
 		 <div class="image">
+
+<?php if(strpos(substr($product['description'],-20), 'freeship') !== false){ ?>
+			 <span class="product-label-freeship product-label">
+			<span class="">
+				<img src="/image/free-shipping-icon.png" width="60" height="40" alt="">
+			</span>
+
+		</span>
+			 <?php
+	} else {
+
+	}
+?>
+
 		 	<!-- text sale-->
 			<?php if( $product['special'] ) {   ?>
 	    	<span class="product-label-special product-label">
