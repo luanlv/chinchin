@@ -1,5 +1,4 @@
  <header id="header">
-	 Hellowworld
 	<div id="topbar">
 	  	<div class="container">
 		    <div class="show-desktop">
