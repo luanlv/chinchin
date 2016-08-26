@@ -1,4 +1,5 @@
  <header id="header">
+	 Hellowworld
 	<div id="topbar">
 	  	<div class="container">
 		    <div class="show-desktop">
@@ -25,6 +26,25 @@
 									<li><a class="last checkout" href="<?php echo $checkout; ?>"><span class="fa fa-file"></span><?php echo $text_checkout; ?></a></li> 					
 								</ul>
 							</div>					
+					</div>
+					<div class="show-mobile hidden-lg hidden-md">
+
+						<div class="btn-top quick-user pull-left">
+							<div class="form-control quickaccess-toggle">
+								<i class="fa fa-user"></i>
+							</div>
+							<div class="inner-toggle dropdown-menu">
+								<div class="login links">
+									Xin chào, bạn có thể <a href="http://shoptuancua.com/index.php?route=account/login">đăng nhập</a> hoặc <a href="http://shoptuancua.com/index.php?route=account/register">tạo tài khoản</a>.															</div>
+							</div>
+						</div>
+						<div class="quick-cart btn-top pull-left">
+							<div class="quickaccess-toggle form-control">
+								<a href="/index.php?route=checkout/cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+
+
 					</div>
 					<div class="welcome pull-right hidden-sm hidden-xs">
 						<?php if ($logged) { ?>
