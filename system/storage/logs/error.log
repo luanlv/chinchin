@@ -113,3 +113,5 @@
 2016-08-24 21:56:28 - PHP Notice:  Undefined index: route in /opt/lampp/htdocs/catalog/controller/module/pavblogcategory.php on line 35
 2016-08-24 21:56:28 - PHP Notice:  Undefined index: route in /opt/lampp/htdocs/catalog/controller/module/pavblogcategory.php on line 35
 2016-08-24 22:20:40 - PHP Notice:  Undefined variable: captcha in /opt/lampp/htdocs/catalog/view/theme/pav_styleshop/template/product/product_detail_hitech.tpl on line 336
+2016-08-27 11:25:10 - PHP Warning:  DOMDocument::loadXML(): Empty string supplied as input in /opt/lampp/htdocs/admin/controller/extension/modification.php on line 139
+2016-08-27 11:25:10 - PHP Notice:  Trying to get property of non-object in /opt/lampp/htdocs/admin/controller/extension/modification.php on line 142

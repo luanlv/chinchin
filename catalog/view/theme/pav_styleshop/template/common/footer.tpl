@@ -186,7 +186,7 @@
     var f_chat_star_2 = "Tôi có thế giúp đỡ gì cho bạn?";
     var f_chat_star_3 = "<a href='javascript:;' onclick='f_bt_start_chat()' id='f_bt_start_chat'>Bắt đầu Chat</a>";
     var f_chat_star_4 = "Chú ý: Bạn phải đăng nhập <a href='http://facebook.com/' target='_blank' rel='nofollow'>Facebook</a> mới có thể trò chuyện.";
-    var f_chat_fanpage = "Testpage-1741633849457375"; /* Đây là địa chỉ Fanpage*/
+    var f_chat_fanpage = "chinchinhoanghai"; /* Đây là địa chỉ Fanpage*/
     var f_chat_background_title = "#3B5998"; /* Lấy mã màu tại đây http://megapixelated.com/tags/ref_colorpicker.asp */
     var f_chat_color_title = "#fff";
     var f_chat_cr_vs = 21; /* Version ID */
