@@ -20,3 +20,7 @@
 .cart-top .dropdown-menu {
     width: 450px;
 }
+
+#fb_alert_num {
+    display: none !important;
+}
